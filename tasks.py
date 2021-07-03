@@ -1,5 +1,4 @@
-from invoke_release.tasks import *  # noqa: F403
-
+from invoke_release.tasks import configure_release_parameters  # noqa: F403
 
 configure_release_parameters(  # noqa: F405
     module_name='calls_calculator',
@@ -7,4 +6,3 @@ configure_release_parameters(  # noqa: F405
     use_pull_request=True,
     use_tag=False,
 )
-
