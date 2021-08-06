@@ -1,4 +1,7 @@
-from invoke_release.tasks import configure_release_parameters  # noqa: F403
+# type: ignore
+from __future__ import absolute_import, unicode_literals
+
+from invoke_release.tasks import *  # type: ignore
 
 configure_release_parameters(  # noqa: F405
     module_name='calls_calculator',
