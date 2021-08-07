@@ -35,11 +35,12 @@ class Command:
         self.billing_period = billing_period
 
     def run(self):
-        Processor(
+        invoice = Processor(
             phone_number=self.phone_number,
             raw_calls=self.get_raw_calls_from_csv(self.file),
             billing_period=self.billing_period,
         ).process()
+        print('Invoice: {}'.format(invoice.__dict__))
 
 
 if __name__ == '__main__':
