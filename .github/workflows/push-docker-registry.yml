@@ -6,8 +6,8 @@
 name: Publish Docker image
 
 on:
-  release:
-    types: [published]
+  branches:
+    - invoke-release*
 
 env:
   REGISTRY: ghcr.io
