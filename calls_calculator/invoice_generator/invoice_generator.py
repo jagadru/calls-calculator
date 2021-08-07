@@ -18,6 +18,9 @@ class InvoiceGenerator(object):
         self.calls = calls
 
     def _get_movements(self) -> List:
+        """
+        Returns a list of Movements given the provided user and calls.
+        """
         movements = []  # type: List
 
         for call in self.calls:
@@ -36,6 +39,9 @@ class InvoiceGenerator(object):
         return movements
 
     def _get_total_international_minutes(self) -> int:
+        """
+        Sums all international minutes
+        """
         return sum([
             call.duration_in_minutes
             for call in self.calls
@@ -43,6 +49,9 @@ class InvoiceGenerator(object):
         ])
 
     def _get_total_national_minutes(self) -> int:
+        """
+        Sums all national minutes
+        """
         return sum([
             call.duration_in_minutes
             for call in self.calls
@@ -50,6 +59,9 @@ class InvoiceGenerator(object):
         ])
 
     def _get_total_friends_minutes(self) -> int:
+        """
+        Sums all friends minutes
+        """
         return sum([
             call.duration_in_minutes
             for call in self.calls
@@ -63,6 +75,9 @@ class InvoiceGenerator(object):
         ])
 
     def generate(self):
+        """
+        Generates the invoice
+        """
         movements = self._get_movements()
 
         invoice_parameters = {

@@ -31,12 +31,15 @@ class Processor:
     ) -> None:
         self.phone_number = phone_number
         self.raw_calls = raw_calls
-        self.billing_period = datetime.strptime(billing_period, BILLING_PERIOD_DATETIME_FORMAT)
+        self.billing_period = datetime.strptime(
+            billing_period,
+            BILLING_PERIOD_DATETIME_FORMAT,
+        )
         self.user = self._get_user_information(self.phone_number)
 
-    def _should_process(self, start_time, caller_number, destination_number):
+    def _should_process(self, start_time, billing_period, caller_number, destination_number):
         return all([
-            start_time > self.billing_period,
+            start_time > billing_period,
             self.phone_number in [caller_number, destination_number]
         ])
 
@@ -45,11 +48,19 @@ class Processor:
         self.user = self._get_user_information(self.phone_number)
 
         for raw_call in self.raw_calls:
-            start_time = datetime.strptime(raw_call.get('start_time'), CALL_DATETIME_FORMAT)
+            start_time = datetime.strptime(
+                raw_call.get('start_time'),
+                CALL_DATETIME_FORMAT,
+            )
             caller_number = raw_call.get('caller_number')
             destination_number = raw_call.get('destination_number')
 
-            if not self._should_process(start_time, caller_number, destination_number):
+            if not self._should_process(
+                start_time,
+                self.billing_period,
+                caller_number,
+                destination_number,
+            ):
                 continue
 
             try:
@@ -79,5 +90,4 @@ class Processor:
 
             self.calls.append(call)
 
-        invoice = InvoiceGenerator(user=self.user, calls=self.calls).generate()
-        print('Invoice: {}'.format(invoice.__dict__))
+        return InvoiceGenerator(user=self.user, calls=self.calls).generate()
