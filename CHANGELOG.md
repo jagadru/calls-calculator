@@ -55,3 +55,8 @@
 -------------------
 - Update push-docker-registry.yml (#34)
 
+
+0.15.0 (2021-08-07)
+-------------------
+- [PATCH] Added missing unit tests (#36)
+
