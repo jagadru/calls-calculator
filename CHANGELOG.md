@@ -31,3 +31,8 @@
 - Update push-docker-registry.yml (#22)
 - Fix invalid field (#20)
 
+
+0.8.0 (2021-08-06)
+------------------
+- Add version to docker tag (#24)
+
