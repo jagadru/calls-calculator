@@ -45,5 +45,4 @@
 0.11.0 (2021-08-06)
 -------------------
 - Update push-docker-registry.yml (#30)
-- Update push-docker-registry.yml (#28)
 
