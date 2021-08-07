@@ -7,8 +7,8 @@ name: Publish Docker image
 
 on:
   push:
-    tag:
-      - *.*.* 
+    tags:
+      - '*.*.*'
 
 env:
   REGISTRY: ghcr.io
