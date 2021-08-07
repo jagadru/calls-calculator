@@ -36,3 +36,8 @@
 ------------------
 - Add version to docker tag (#24)
 
+
+0.9.0 (2021-08-06)
+------------------
+- Update push-docker-registry.yml (#26)
+
