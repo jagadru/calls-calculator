@@ -17,8 +17,9 @@
 - First basic implementation of the Call calculator
 
 
-0.4.0 (2021-08-06)
+0.4.1 (2021-08-06)
 ------------------
+- Update push-docker-registry.yml (#16)
 - Update push-docker-registry.yml (#14)
 - Support for GitHub Packages (#13)
 - Update push-docker-registry.yml (#12)
