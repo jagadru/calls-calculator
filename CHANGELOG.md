@@ -25,3 +25,8 @@
 - Update push-docker-registry.yml (#12)
 - Update push-pull-request-action.yml (#11)
 
+
+0.6.0 (2021-08-06)
+------------------
+- Fix invalid field (#20)
+
