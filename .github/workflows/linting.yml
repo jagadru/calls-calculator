@@ -1,0 +1,33 @@
+name: Linting
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  linter:
+    name: Linters
+    runs-on: ubuntu-latest
+    outputs:
+      ts: ${{ steps.changes.outputs.ts }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Get All Changed Files
+        id: files
+        uses: jitterbit/get-changed-files@v1
+      - name: Setup Python 3.9.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.6'
+      - name: Install dependencies
+        env:
+          LC_ALL: C.UTF-8
+        run: |
+          pip install wheel pre-commit
+          pre-commit install --install-hooks
+      - name: Run pre-commit
+        run: |
+          echo '${{ steps.files.outputs.all }}'
+          pre-commit run --show-diff-on-failure --files ${{ steps.files.outputs.all }}
