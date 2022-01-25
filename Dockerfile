@@ -1,10 +1,8 @@
-FROM python:3.7-alpine
+FROM python:3.9.6-slim-buster
 
+ADD . /usr/src/calls_calculator 
 WORKDIR /usr/src/calls_calculator
 
-COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
-
-CMD [ "python", "run.py" ]
+CMD ["gunicorn", "-b", "0.0.0.0:3101", "server.app:wsgi", "--timeout", "1200"]
