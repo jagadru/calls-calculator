@@ -24,7 +24,7 @@ jobs:
 
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d - -f 4)      
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d - -f 4)
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1.10.0

@@ -11,16 +11,16 @@ from calls_calculator.models.user import User
 @pytest.fixture()
 def mock_user_service():
     response = {
-        "address": "2040 Dorris Prairie",
-        "friends": [
-            "+5491167920944",
-            "+5491167980954",
-            "+5491167980953",
-            "+5491167980951",
-            "+191167980953"
+        'address': '2040 Dorris Prairie',
+        'friends': [
+            '+5491167920944',
+            '+5491167980954',
+            '+5491167980953',
+            '+5491167980951',
+            '+191167980953'
         ],
-        "name": "Myrna Hermann IV",
-        "phone_number": "+5492612514258"
+        'name': 'Myrna Hermann IV',
+        'phone_number': '+5492612514258'
     }
 
     with mock.patch(
