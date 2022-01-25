@@ -1,5 +1,3 @@
-import os
-
 COUNTRY_CODE_REGEX = r'^\+(?P<country_code>\d.*?)9'
 BASE_FEE_NATIONAL_CALL = 2.5
 BASE_FEE_INTERNATIONAL_CALL = 20.0

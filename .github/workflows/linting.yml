@@ -6,14 +6,17 @@ on:
       - main
 
 jobs:
-  code-quality:
+  linter:
     name: Linters
-    runs-on: [ ci-small ]
+    runs-on: ubuntu-latest
+    outputs:
+      ts: ${{ steps.changes.outputs.ts }}
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
+      - name: Get All Changed Files
+        id: files
+        uses: jitterbit/get-changed-files@v1
       - name: Setup Python 3.9.6
         uses: actions/setup-python@v2
         with:
@@ -25,14 +28,6 @@ jobs:
           pip install wheel pre-commit
           pre-commit install --install-hooks
       - name: Run pre-commit
-        env:
-          GITHUB_PR_URL: 'https://github.com/api/v3/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files'
-        # The `jq` filters below work as follows
-        # .[]  --> Iterate over the array in the response to the cURL request
-        # .filename  --> Get the property "filename" of each object in the array
-        # @sh  --> Makes each string shell safe (i.e. filenames with spaces will be handled correctly)
         run: |
-          CHANGED_FILES_RESPONSE=$(curl -s -X GET -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -G ${{ env.GITHUB_PR_URL }})
-          CHANGED_FILES=$(echo "$CHANGED_FILES_RESPONSE" | jq --join-output '[.[] | .filename] | join(" ")')
-          echo "Running linting on $CHANGED_FILES"
-          echo "$CHANGED_FILES_RESPONSE" | jq --raw-output '.[] | .filename | @sh' | xargs pre-commit run --show-diff-on-failure --files
+          echo '${{ steps.files.outputs.all }}'
+          pre-commit run --show-diff-on-failure --files ${{ steps.files.outputs.all }}
