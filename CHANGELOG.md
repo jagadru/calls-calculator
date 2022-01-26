@@ -58,3 +58,9 @@
 0.15.0 (2021-08-07)
 -------------------
 - [PATCH] Added missing unit tests (#36)
+
+0.15.2 (2022-01-25)
+-------------------
+- Create a GHA to run pre-commit on each PR (#41)
+- Setup pre commit (#40)
+- Basic endpoint (#39)
