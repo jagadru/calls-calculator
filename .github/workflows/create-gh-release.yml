@@ -1,0 +1,27 @@
+name: Releases
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d - -f 4)
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "calls_calculator_${{VERSION}}.tar.gz"
+          token: ${{ secrets.GITHUB_TOKEN }}
